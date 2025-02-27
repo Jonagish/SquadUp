@@ -16,7 +16,9 @@ We pledge to be present and engaged in all scheduled meetings and work sessions.
 
 ## Assignments 
 
+We will distribute assignments fairly based on individual strengths, interests, and workload balance. Tasks will be assigned through group discussions, and each member is expected to complete their work on time and at a high standard.
 
+**If a member fails to complete or poorly completes an assignment**, the team will first address the issue through direct communication, offering support if needed. If the problem persists, the team will escalate the matter by discussing reassignment, redistribution of tasks, or involving the instructor if necessary. Our goal is to maintain accountability while fostering a supportive and productive environment.
 
 ## Participation 
 
