@@ -31,3 +31,5 @@ We pledge to be present and engaged in all scheduled meetings and work sessions.
 ## Enforcement/ Feedback
 
 ## Signatures
+![Picture of Ryan Kraus's Signature, added to the Signatures Secion of the CONDUCT.md]
+(https://drive.google.com/file/d/1vht_gj8zw9wo6J1QKkpeX3gP0n0FuAS0/view?usp=sharing)
