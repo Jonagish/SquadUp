@@ -53,5 +53,4 @@ Feedback will be welcomed throughout the project to ensure everyone feels heard 
 If problems persist after group discussion, we agree to involve the instructor or project supervisor to help mediate and find a resolution. Our goal is to maintain a positive, productive, and fair working environment for everyone.
 
 ## Signatures
-![Picture of Ryan Kraus's Signature, added to the Signatures Secion of the CONDUCT.md]
-(https://drive.google.com/file/d/1vht_gj8zw9wo6J1QKkpeX3gP0n0FuAS0/view?usp=sharing)
+https://drive.google.com/drive/folders/1ybyPWRptoQLwEL0C9fDGUpuqGpl1-mSy?dmr=1&ec=wgc-drive-hero-goto
