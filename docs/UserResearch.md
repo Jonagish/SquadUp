@@ -30,3 +30,15 @@ Users struggle with location-based challenges, such as finding open courts or ne
 
 **Team Action (if any):**
 Implement a real-time court/facility availability tracker or a map feature for sports venues.
+
+## Observation 3: Team Member - Jonas Genao
+
+**Observation Statement:** Users regard communication as crucial when it comes to coordinating 
+
+**Supporting Data:** 
+"Very important because of how many people will be there and where everyone is meeting"
+"I think it’s important because communication and teamwork is crucial for a team. Bonding outside of games is also super important to grow an improved connection with your team."
+
+"Setting Expectations – Players need to understand game plans, strategies, and any specific roles they are expected to play. Clear communication helps align everyone with the team’s objectives.
+Motivation & Mindset – Pre-game talks can help boost confidence, build team spirit, and mentally prepare players for competition. A strong pep talk can set the tone for performance."
+
