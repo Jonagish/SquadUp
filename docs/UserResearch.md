@@ -45,6 +45,27 @@ Implement a real-time court/facility availability tracker or a map feature for s
 **Team Action (if any):**
 Implement an in-app messaging option to allow for communication.
 
+## Observation 4: Team Member - Joshua Pereira
+
+**Observation Statement:** Users value flexibility and spontaneity when participating in pick-up games, preferring options that allow them to join or organize games on short notice. 
+
+**Supporting Data:** 
+"Sometimes I just show up at the park and hope there’s a game."
+
+"I don’t always plan ahead; I like to play whenever I have free time."
+
+"It would be cool if there was a way to see last-minute games happening near me."
+
+"I don’t want to commit too far in advance because my schedule changes a lot."
+
+**Team Action (if any):**
+Implement a "Drop-in" or "Last-Minute Games" feature that highlights games available soon.
+
+Allow users to indicate their availability and receive notifications for impromptu games nearby.
+
+Create a way for hosts to mark games as "open to join" for players looking for quick participation.
+
+
 
 
 
