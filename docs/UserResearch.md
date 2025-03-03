@@ -37,8 +37,14 @@ Implement a real-time court/facility availability tracker or a map feature for s
 
 **Supporting Data:** 
 "Very important because of how many people will be there and where everyone is meeting"
+
 "I think it’s important because communication and teamwork is crucial for a team. Bonding outside of games is also super important to grow an improved connection with your team."
 
-"Setting Expectations – Players need to understand game plans, strategies, and any specific roles they are expected to play. Clear communication helps align everyone with the team’s objectives.
-Motivation & Mindset – Pre-game talks can help boost confidence, build team spirit, and mentally prepare players for competition. A strong pep talk can set the tone for performance."
+"Communicating with players before a game is extremely important for several reasons: Setting Expectations – Players need to understand game plans, strategies, and any specific roles they are expected to play. Clear communication helps align everyone with the team’s objectives. Motivation & Mindset – Pre-game talks can help boost confidence, build team spirit, and mentally prepare players for competition. A strong pep talk can set the tone for performance."
+
+**Team Action (if any):**
+Implement an in-app messaging option to allow for communication.
+
+
+
 
