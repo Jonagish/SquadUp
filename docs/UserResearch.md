@@ -9,6 +9,7 @@ Some users go directly to local parks, gyms, or courts and ask to join ongoing g
 A portion of users use online platforms such as Google, social media, or apps like IMLeagues.
 A considerable number of users do not actively seek or participate in pick-up games.
 Several users are unaware of what a pick-up game is or how to find one.
+
 Team Action (if any):
 Consider implementing a feature that connects users with local pick-up games based on location and interests.
 Provide educational content on what pick-up games are and how to join them.
