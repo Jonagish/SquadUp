@@ -65,6 +65,19 @@ Allow users to indicate their availability and receive notifications for impromp
 
 Create a way for hosts to mark games as "open to join" for players looking for quick participation.
 
+## Observation 5: Team Member - Ryan Kraus
+
+**Observation Statement:** Users want in-app notifications to stay updated on game availability, changes, and important updates without relying on external communication.
+
+**Supporting Data:** 
+70% of 37 users voted in favor of in-app notifications.
+
+**Team Action (if any):**
+Implement push and in-app notifications for upcoming games, changes, and cancellations.
+
+Allow users to customize notification preferences (e.g., game reminders, last-minute openings, location-based alerts).
+
+Send automated reminders before a scheduled game and alerts when new games are available nearby.
 
 
 
