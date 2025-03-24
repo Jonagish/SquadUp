@@ -9,8 +9,9 @@
 - **User Engagement - Daily active users/Game sign up rate/Messages sent**
   - We are tracking the daily active users to see how many people consistently use the app. We are also tracking how often users sign up for games as well as how often they send meesages, to see if users are interacting with the community.
 
-- **Metric 3 - How to collect**
-  - Explanation or method for collecting this metric.
+- **Games Created - The total number of pickup games created by all users over a specific time period**
+  - Each time the "Create Game" button is successfully pressed and a game is generated, increment this counter.
+  - It gives you a direct view of user activity and demand on the platform. Spikes or drops in this number can help you identify trends, feature impact, or seasonal usage patterns. Since this is basically the main feature of our app we want to make sure this feature is user friendly and people want to create games and they can do so easily
 
 - **Metric 4 - How to collect**
   - Explanation or method for collecting this metric.
