@@ -19,5 +19,5 @@
   - Calculate the retention rate by dividing the number of returning users by the total number of users in the cohort, then multiply by 100.
 
 - **Metric 5 - Game Join Rate**
-  - This metric helps you understand how many games are actually being joined versus how many are created. It gives insight into user interest and participation, showing whether users are actively engaging with the games available on the platform
+  - This metric helps you understand how many games are actually being joined compared to how many games are created. It gives insight into user interest and participation, showing whether users are actively engaging with the games available on the platform
 
