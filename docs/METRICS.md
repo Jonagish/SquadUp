@@ -15,8 +15,8 @@
 
 - **Metric 4 - Retention Rate: The percentage of users who return to the app after a certain period (e.g., 7 days, 30 days)**
   - Identify the cohort of users who first registered or interacted with the app within a specific time period (e.g., one week or one month).
-  -Track how many of those users come back and interact with the app after a set number of days (e.g., 7-day or 30-day return).
-  -Calculate the retention rate by dividing the number of returning users by the total number of users in the cohort, then multiply by 100.
+  - Track how many of those users come back and interact with the app after a set number of days (e.g., 7-day or 30-day return).
+  - Calculate the retention rate by dividing the number of returning users by the total number of users in the cohort, then multiply by 100.
 
 - **Metric 5 - How to collect**
   - Explanation or method for collecting this metric.
