@@ -1,4 +1,4 @@
-# A/B Test Name: Sign-Up Method: Email vs Social Media Sign-Up
+#1 A/B Test Name: Sign-Up Method: Email vs Social Media Sign-Up
 
 **User Story Number:** US1 (Account Creation)
 
@@ -41,8 +41,7 @@ We are testing whether allowing users to sign up through social media accounts r
      - **Email input field**
      - **Password input field**
      - **Sign-up button**
-   
-   ![Email Sign-Up](https://example.com/mockup-email-signup.png)
+
 
 2. **Version B (Social Media Sign-Up)**:
    - Sign-up screen with the option to log in via social media (Google, Facebook, etc.).
@@ -50,9 +49,7 @@ We are testing whether allowing users to sign up through social media accounts r
    - Mockup of the screen:
      - **Sign up with Google button**
      - **Sign up with Facebook button**
-     - **Email sign-up link** (optional fallback)
-   
-   ![Social Media Sign-Up](https://example.com/mockup-social-signup.png)
+
 
 ## Rationale for Variations:
 The goal of the test is to measure how the method of signing up affects user conversion and satisfaction. By allowing social media logins, we are aiming to reduce friction and make the sign-up process quicker and easier for users, potentially increasing the number of successful sign-ups. The email/password option is still available as a backup in case the user prefers that method.
