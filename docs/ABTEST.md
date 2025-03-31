@@ -235,7 +235,7 @@ This test will help determine whether an extra navigation step (home page) impro
 This experiment tests whether personalizing the discovery experience can improve action-oriented behavior in the app. We expect that relevance-driven suggestions will reduce the number of irrelevant games users scroll past, increase game detail views, and ultimately lead to more games joined. The chronological list acts as a control, reflecting the current default user experience.
 
 
-## 2: A/B Test Name: Current Logo vs New Logo Variations
+## 5: A/B Test Name: Current Logo vs New Logo Variations
 
 **User Story Number:** US4 (Golden Path & UI/UX)
 
