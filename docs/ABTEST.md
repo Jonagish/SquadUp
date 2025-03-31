@@ -183,6 +183,51 @@ Using **Firebase Remote Config**, we will divide users into two groups:
 - Color palette: Bold accent colors (e.g., blue, teal, purple and just brighter colors), gradients, vibrant buttons.
 - Design goal: Eye-catching, energetic, and modern interface that feels inviting.
 
+# 4: A/B Test Name: Skip Home Page
+
+**User Story Number:** US1 (Account Creation)
+
+## Metrics:
+- Click-through rate (CTR)
+- Sign-up conversion rate
+- Drop-off rate
+
+## Hypothesis:
+We believe that removing the home page and directing users straight to the login screen will reduce friction and increase sign-up conversion rates. This assumes that eliminating an extra navigation step will streamline the user journey, making it easier for users to access the sign-up page.
+
+## What problem are we trying to solve? Its impact?
+Currently, users land on a home page before deciding whether to log in or sign up. This extra step may create unnecessary friction, leading to drop-offs. By removing the home page and taking users directly to the login screen (with an option to navigate to sign-up), we aim to simplify the flow, potentially improving user conversion and engagement.
+
+## Experiment:
+### Experiment Setup:
+- 50% of new users will see **Version A** (Home Page with Login/Sign-Up buttons).
+- 50% will see **Version B** (No Home Page, direct to Login).
+- Firebase Remote Config will be used to assign users randomly.
+
+### Audience:
+- New users who have not previously signed up or logged in.
+
+### Tracking Setup using Firebase Analytics:
+- `homepage_viewed`: Tracks if the user lands on the home page (Version A only).
+- `login_screen_viewed`: Tracks when the login screen is viewed.
+- `sign_up_screen_viewed`: Tracks when the sign-up screen is viewed.
+- `sign_up_attempt`: Measures when users start signing up.
+- `sign_up_success`: Measures completed sign-ups.
+- Drop-off rate between screens.
+
+## Variations:
+### Version A (Home Page Before Login/Sign-Up):
+- Users land on a home page with two buttons:
+  - **Log In**
+  - **Sign Up**
+- Users must tap a button to proceed.
+
+### Version B (No Home Page, Direct to Login Screen):
+- Users are immediately taken to the login screen.
+- A **Sign Up** button is available for new users.
+
+## Rationale for Variations:
+This test will help determine whether an extra navigation step (home page) improves or hinders the sign-up process. If Version B results in a higher CTR and conversion rate, we may remove the home page permanently to streamline user onboarding.
 
 
 
