@@ -1,4 +1,4 @@
-#1 A/B Test Name: Sign-Up Method: Email vs Social Media Sign-Up
+# 1: A/B Test Name: Sign-Up Method: Email vs Social Media Sign-Up
 
 **User Story Number:** US1 (Account Creation)
 
