@@ -53,3 +53,80 @@ We are testing whether allowing users to sign up through social media accounts r
 
 ## Rationale for Variations:
 The goal of the test is to measure how the method of signing up affects user conversion and satisfaction. By allowing social media logins, we are aiming to reduce friction and make the sign-up process quicker and easier for users, potentially increasing the number of successful sign-ups. The email/password option is still available as a backup in case the user prefers that method.
+
+# 2: A/B Test Name: Suggested Game Feed vs. Chronological Feed
+
+**User Story Number:** US4 Golden Path (UI/UX)
+
+---
+
+## Metrics:
+- **Happiness:** User feedback regarding relevance and usefulness of game recommendations  
+- **Engagement:** Number of game cards clicked per session  
+- **Adoption:** Percentage of new users who join a game within their first 7 days  
+- **Retention:** Percentage of users who return to the app within 3 days  
+- **Task Success Rate:** Game join rate after viewing details
+
+---
+
+## Hypothesis:
+We believe that showing users a suggested game feed (based on their preferences and location) instead of a chronological list will lead to higher engagement and game joins. The personalized experience will help users find more relevant games quickly, reducing the time and effort needed to decide.
+
+---
+
+## What problem are we trying to solve? Its impact?
+Currently, the game discovery feed shows a list of games sorted by the time they were posted, regardless of how relevant they are to the user. This causes users—especially in densely populated areas—to scroll through long lists of irrelevant games, which leads to decision fatigue, lower game join rates, and ultimately, a drop in user engagement.
+
+Our analytics show that although many users view the feed, a much smaller percentage click into game details or join a game. This indicates that the current game list presentation is not effectively helping users take action.
+
+By introducing a suggested game feed, we aim to reduce cognitive load, increase perceived value, and improve both short-term engagement and long-term retention.
+
+---
+
+## Experiment:
+- **Experiment Setup:**  
+  We will use Firebase Remote Config to serve two versions of the game feed to new and returning users. The traffic will be split evenly: 50% will see the suggested (personalized) game feed, and 50% will continue to see the default chronological game feed.
+
+- **Audience:**  
+  The test will target all logged-in users who have completed onboarding. This includes both new and returning users to evaluate the general usability and relevance of feed variations across the user base.
+
+- **Tracking Setup using Firebase Analytics:**  
+  The following events will be tracked:
+  - `game_card_view` – when a user views a game in the feed  
+  - `game_details_open` – when a user taps to open the game detail screen  
+  - `game_joined` – when a user successfully joins a game  
+  - `user_retained_3d` – to measure if the user returns within 3 days  
+  - `game_feed_type` – to label whether the user was in the suggested or chronological group
+
+---
+
+## Variations:
+
+### Version A: Suggested Game Feed
+- Game cards are ranked using a relevance algorithm (factors include distance, sport preference, skill level, time of game, user availability).
+- Visual tags such as “Top Pick” or “Near You” are shown to enhance trust and appeal.
+- Priority is given to games that match the user's interests.
+
+**Mockup Screen Elements:**
+- Game title + time + location  
+- Relevance tag (e.g. "Top Pick")  
+- Player preview (avatars of those who joined)  
+- Join button
+
+---
+
+### Version B: Chronological Game Feed
+- Game cards are shown in the order they were posted, with the most recent at the top.
+- No relevance-based prioritization or visual tags.
+- Users scroll through the list manually to find games of interest.
+
+**Mockup Screen Elements:**
+- Game title + time + location  
+- Basic list layout, no player preview  
+- Join button
+
+---
+
+## Rationale for Variations:
+This experiment tests whether personalizing the discovery experience can improve action-oriented behavior in the app. We expect that relevance-driven suggestions will reduce the number of irrelevant games users scroll past, increase game detail views, and ultimately lead to more games joined. The chronological list acts as a control, reflecting the current default user experience.
+
