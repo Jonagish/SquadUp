@@ -127,6 +127,65 @@ By introducing a suggested game feed, we aim to reduce cognitive load, increase 
 
 ---
 
+# 3. A/B Test: Color Scheme - Vibrant vs. Minimalist
+
+## User Story Number
+**US4** (Golden Path - UI/UX)
+
+## Metrics (HEART Framework)
+- **Happiness**: User satisfaction and feedback about the sign-up process.
+- **Engagement**: Sign-up conversion rate.
+- **Adoption**: Percentage of users who successfully sign up and continue using the app.
+- **Retention**: Percentage of users who return to the app after signing up.
+- **Task Success Rate**: Completion rate of the sign-up process.
+
+## Hypothesis
+Introducing a vibrant color scheme will improve user perception of the app's interface, leading to increased sign-up conversion rates, higher satisfaction, and improved long-term retention compared to the current minimalist color palette.
+
+## What problem are we trying to solve? Its impact?
+Users have reported that the current minimalist design feels uninspired or generic, which may negatively affect their willingness to complete the sign-up process and continue using the app. Since the sign-up screen is a key touchpoint in the user journey, improving its visual appeal could have a significant impact on:
+
+- Sign-up completion (task success)
+- First impression and satisfaction (happiness)
+- Continued usage and return visits (adoption & retention)
+
+We believe the color scheme plays a vital role in building trust, enthusiasm, and engagement during onboarding.
+
+## Experiment
+
+### Setup
+Using **Firebase Remote Config**, we will divide users into two groups:
+
+- **Group A (Control)**: 50% of users will see the existing **Minimalist** color scheme.
+- **Group B (Experiment)**: 50% of users will see a new **Vibrant** color scheme applied to the sign-up flow.
+
+### Audience
+- All new users opening the app for the first time.
+
+### Tracking (Firebase Analytics)
+- Event: `sign_up_start`
+- Event: `sign_up_complete`
+- Event: `sign_up_variant` (A or B)
+- Event: `app_open` (to measure return rate)
+- Custom metrics:
+  - `user_feedback_rating`
+  - `time_to_complete_signup`
+  - `retention_7_day`
+  - `conversion_sign_up`
+
+## Variations
+
+### Variation A – Minimalist (Control)
+- Color palette: Light grays, white backgrounds, subtle button tones.
+- Design goal: Clean and neutral interface, focused on simplicity.
+
+### Variation B – Vibrant (Experiment)
+- Color palette: Bold accent colors (e.g., blue, teal, orange), gradients, vibrant buttons.
+- Design goal: Eye-catching, energetic, and modern interface that feels inviting.
+
+> 🖼️ Design mockups and UI comparison assets will be added to this test case once finalized by the design team.
+
+
 ## Rationale for Variations:
 This experiment tests whether personalizing the discovery experience can improve action-oriented behavior in the app. We expect that relevance-driven suggestions will reduce the number of irrelevant games users scroll past, increase game detail views, and ultimately lead to more games joined. The chronological list acts as a control, reflecting the current default user experience.
 
