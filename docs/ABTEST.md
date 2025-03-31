@@ -176,14 +176,14 @@ Using **Firebase Remote Config**, we will divide users into two groups:
 ## Variations
 
 ### Variation A – Minimalist (Control)
-- Color palette: Light grays, white backgrounds, subtle button tones.
+- Color palette: Light Colors, white backgrounds, Orange buttons.
 - Design goal: Clean and neutral interface, focused on simplicity.
 
 ### Variation B – Vibrant (Experiment)
-- Color palette: Bold accent colors (e.g., blue, teal, orange), gradients, vibrant buttons.
+- Color palette: Bold accent colors (e.g., blue, teal, purple and just brighter colors), gradients, vibrant buttons.
 - Design goal: Eye-catching, energetic, and modern interface that feels inviting.
 
-> 🖼️ Design mockups and UI comparison assets will be added to this test case once finalized by the design team.
+
 
 
 ## Rationale for Variations:
