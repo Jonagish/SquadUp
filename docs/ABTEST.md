@@ -234,3 +234,52 @@ This test will help determine whether an extra navigation step (home page) impro
 ## Rationale for Variations:
 This experiment tests whether personalizing the discovery experience can improve action-oriented behavior in the app. We expect that relevance-driven suggestions will reduce the number of irrelevant games users scroll past, increase game detail views, and ultimately lead to more games joined. The chronological list acts as a control, reflecting the current default user experience.
 
+
+## 2: A/B Test Name: Current Logo vs New Logo Variations
+
+**User Story Number:** US4 (Golden Path & UI/UX)
+
+### Metrics:
+- **Happiness:** User feedback and sentiment regarding the logo design.
+- **Engagement:** Time spent on the app and interaction rates.
+- **Adoption:** Percentage of users who sign up or explore the app after seeing the logo.
+- **Retention:** Percentage of users who return to the app after initial exposure.
+- **Brand Recall:** User ability to recognize and associate the logo with the app.
+
+### Hypothesis:
+We believe that testing a new logo design against the current logo will provide insights into which version resonates better with users. A modernized or more visually appealing logo might increase brand recognition, engagement, and user trust.
+
+### What problem are we trying to solve? Its impact?
+The current logo has been in use since the app’s launch, but it is unclear if it effectively communicates the brand identity and appeals to our target audience. A logo that does not resonate with users can impact brand perception, reduce user engagement, and fail to create a lasting impression.
+
+By testing different logo variations, we aim to identify whether a new design leads to increased user engagement, adoption, and positive sentiment, which in turn may drive higher retention rates.
+
+### Experiment:
+#### Experiment Setup:
+We will randomly assign 50% of users to see the current logo (**Version A**) and the other 50% to see one of the new logo variations (**Version B**). This test will be implemented across the app interface, website, and marketing materials.
+   
+#### Audience:
+The test will target both new and existing users to measure first impressions and long-term engagement. Users will be randomly divided into groups, ensuring unbiased exposure to the different logo designs.
+   
+#### Tracking Setup using Firebase Analytics & User Surveys:
+We will track the following:
+- User interaction and time spent on app pages (to measure engagement).
+- Conversion rates (e.g., sign-ups, purchases, or key interactions).
+- Brand recall through post-test surveys.
+- User sentiment analysis using direct feedback and app store reviews.
+
+### Variations:
+#### Version A (Current Logo):
+- The existing logo remains unchanged and is used as the control group.
+- Appears on the app’s splash screen, home screen, and marketing materials.
+
+#### Version B (New Logo Variations):
+- A redesigned logo with different colors, fonts, or symbols.
+- Displayed in the same locations as Version A for a direct comparison.
+- Multiple variations may be tested (e.g., modernized design, simplified version, color adjustments).
+
+### Rationale for Variations:
+By comparing user engagement and feedback on different logo designs, we aim to determine if a new logo positively impacts brand perception and user interaction. A visually appealing and memorable logo could lead to improved adoption, increased trust, and better long-term retention.
+
+
+
