@@ -183,7 +183,7 @@ Using **Firebase Remote Config**, we will divide users into two groups:
 - Color palette: Bold accent colors (e.g., blue, teal, purple and just brighter colors), gradients, vibrant buttons.
 - Design goal: Eye-catching, energetic, and modern interface that feels inviting.
 
-# 4: A/B Test Name: Skip Home Page
+# 4: A/B Test Name: Start on Log in Page Vs Start on Home Page
 
 **User Story Number:** US1 (Account Creation)
 
