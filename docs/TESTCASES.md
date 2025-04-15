@@ -3,3 +3,5 @@
 [User Story 1 - Google Slides](https://docs.google.com/presentation/d/18X1wAaB4ZPVfFXThYbTaudsY__nKsJyZHFHTYIUdYJE/edit?slide=id.g349ac2556af_0_5#slide=id.g349ac2556af_0_5)
 
 [User Story 2 - Google Slides](https://docs.google.com/presentation/d/18X1wAaB4ZPVfFXThYbTaudsY__nKsJyZHFHTYIUdYJE/edit?usp=sharing)
+
+[User Story 3 - Backend Setup](https://docs.google.com/presentation/d/1ipqJcLB2nLbMzGPVf4txJU9LgS614lc1SuitQkGBYaw/edit?usp=sharing)
