@@ -98,6 +98,29 @@ void main() async {
       await tester.enterText(
           find.byKey(const ValueKey('Confirm_pass_field_80q8')), 'Password');
       await tester.tap(find.byKey(const ValueKey('SignUp_Button_ms4s')));
+      expect(find.text('badly formatted'), findsWidgets);
+    });
+
+    testWidgets('Passwords do not match', (WidgetTester tester) async {
+      _overrideOnError();
+
+      await tester.pumpWidget(ChangeNotifierProvider(
+        create: (context) => FFAppState(),
+        child: MyApp(
+          entryPage: SignUpPageWidget(),
+        ),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.pumpAndSettle();
+      await tester.enterText(
+          find.byKey(const ValueKey('email_field_rpdn')), 'test2@example.com');
+      await tester.enterText(
+          find.byKey(const ValueKey('password_field_csu8')), 'Password');
+      await tester.enterText(
+          find.byKey(const ValueKey('password_field_csu8')), 'Password2');
+      await tester.tap(find.byKey(const ValueKey('SignUp_Button_ms4s')));
+      expect(find.text('Passwords don\'t match!'), findsWidgets);
     });
   });
 
