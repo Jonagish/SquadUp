@@ -1,0 +1,18 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "created_games",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "sport",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date_game",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
+}
