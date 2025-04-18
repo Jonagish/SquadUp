@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "385629703208",
+    "project_id": "squad-up-anxjyd",
+    "storage_bucket": "squad-up-anxjyd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385629703208:android:868d770038f49aa65f791d",
+        "android_client_info": {
+          "package_name": "com.mycompany.squadup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgb5I40JqVggrpLsw0qCEXEGbhGwgUUKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385629703208:android:5843f720d64620e05f791d",
+        "android_client_info": {
+          "package_name": "com.uricsc305.squadup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgb5I40JqVggrpLsw0qCEXEGbhGwgUUKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
