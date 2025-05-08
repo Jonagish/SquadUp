@@ -5,12 +5,54 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "date_game",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "list_players",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "created_games",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "sport",
           "order": "ASCENDING"
         },
         {
           "fieldPath": "date_game",
           "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Chats",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "users",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "last_message_datetime",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Chats_Messages",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "chat_ref",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datetime",
+          "order": "DESCENDING"
         }
       ]
     }

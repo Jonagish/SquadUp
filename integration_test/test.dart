@@ -124,6 +124,31 @@ void main() async {
     });
   });
 
+  group('US 4: Golden Path', () {
+    testWidgets('game page', (WidgetTester tester) async {
+      _overrideOnError();
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: 'testA@gmail.com', password: '123456');
+      await tester.pumpWidget(ChangeNotifierProvider(
+        create: (context) => FFAppState(),
+        child: const MyApp(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.tap(find.descendant(
+        of: find.byKey(const ValueKey('NavBarWithMiddleButton_k3n8')),
+        matching: find.byKey(const ValueKey('MiddleButton_o4yp')),
+      ));
+      expect(
+        find.descendant(
+          of: find.byKey(const ValueKey('NavBarWithMiddleButton_k3n8')),
+          matching: find.byKey(const ValueKey('MiddleButton_o4yp')),
+        ),
+        findsOneWidget,
+      );
+    });
+  });
+
   testWidgets('Logout', (WidgetTester tester) async {
     _overrideOnError();
 
@@ -133,7 +158,7 @@ void main() async {
     ));
     await GoogleFonts.pendingFonts();
 
-    await tester.tap(find.byKey(const ValueKey('logoutButton_f93s')));
+    await tester.tap(find.byKey(const ValueKey('UNDEFINED')));
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     expect(find.text('Forgot_link'), findsWidgets);
   });

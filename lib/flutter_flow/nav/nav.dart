@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -80,19 +79,42 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
           ? entryPage ?? GoldenPathWidget()
-          : HomePageWidget(),
+          : LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
               ? entryPage ?? GoldenPathWidget()
-              : HomePageWidget(),
+              : LoginPageWidget(),
         ),
         FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
+          name: HostDetailsWidget.routeName,
+          path: HostDetailsWidget.routePath,
+          asyncParams: {
+            'gameDoc':
+                getDoc(['created_games'], CreatedGamesRecord.fromSnapshot),
+          },
+          builder: (context, params) => HostDetailsWidget(
+            gameDoc: params.getParam(
+              'gameDoc',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: DetailsDropoutWidget.routeName,
+          path: DetailsDropoutWidget.routePath,
+          asyncParams: {
+            'gameDoc':
+                getDoc(['created_games'], CreatedGamesRecord.fromSnapshot),
+          },
+          builder: (context, params) => DetailsDropoutWidget(
+            gameDoc: params.getParam(
+              'gameDoc',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
           name: SignUpPageWidget.routeName,
@@ -105,6 +127,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           builder: (context, params) => LoginPageWidget(),
         ),
         FFRoute(
+          name: GamesJoinedWidget.routeName,
+          path: GamesJoinedWidget.routePath,
+          builder: (context, params) => GamesJoinedWidget(),
+        ),
+        FFRoute(
+          name: DetailsJoinPageWidget.routeName,
+          path: DetailsJoinPageWidget.routePath,
+          asyncParams: {
+            'gameDoc':
+                getDoc(['created_games'], CreatedGamesRecord.fromSnapshot),
+          },
+          builder: (context, params) => DetailsJoinPageWidget(
+            gameDoc: params.getParam(
+              'gameDoc',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
           name: OnboardingWidget.routeName,
           path: OnboardingWidget.routePath,
           builder: (context, params) => OnboardingWidget(),
@@ -115,14 +156,73 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           builder: (context, params) => GoldenPathWidget(),
         ),
         FFRoute(
+          name: MessagesWidget.routeName,
+          path: MessagesWidget.routePath,
+          builder: (context, params) => MessagesWidget(),
+        ),
+        FFRoute(
+          name: FriendsPageWidget.routeName,
+          path: FriendsPageWidget.routePath,
+          builder: (context, params) => FriendsPageWidget(),
+        ),
+        FFRoute(
+          name: MapViewWidget.routeName,
+          path: MapViewWidget.routePath,
+          builder: (context, params) => MapViewWidget(),
+        ),
+        FFRoute(
           name: SettingsWidget.routeName,
           path: SettingsWidget.routePath,
           builder: (context, params) => SettingsWidget(),
         ),
         FFRoute(
-          name: DetailsJoinPageWidget.routeName,
-          path: DetailsJoinPageWidget.routePath,
-          builder: (context, params) => DetailsJoinPageWidget(),
+          name: UpdateProfileWidget.routeName,
+          path: UpdateProfileWidget.routePath,
+          builder: (context, params) => UpdateProfileWidget(),
+        ),
+        FFRoute(
+          name: ChangePasswordWidget.routeName,
+          path: ChangePasswordWidget.routePath,
+          builder: (context, params) => ChangePasswordWidget(),
+        ),
+        FFRoute(
+          name: ForgotPasswordWidget.routeName,
+          path: ForgotPasswordWidget.routePath,
+          builder: (context, params) => ForgotPasswordWidget(),
+        ),
+        FFRoute(
+          name: ChatHomeWidget.routeName,
+          path: ChatHomeWidget.routePath,
+          builder: (context, params) => ChatHomeWidget(),
+        ),
+        FFRoute(
+          name: ChatDetailWidget.routeName,
+          path: ChatDetailWidget.routePath,
+          builder: (context, params) => ChatDetailWidget(
+            chatRef: params.getParam(
+              'chatRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['Chats'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ChatMoreWidget.routeName,
+          path: ChatMoreWidget.routePath,
+          builder: (context, params) => ChatMoreWidget(
+            chatRef: params.getParam(
+              'chatRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['Chats'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MapViewCopyWidget.routeName,
+          path: MapViewCopyWidget.routePath,
+          builder: (context, params) => MapViewCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -295,7 +395,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/homePage';
+            return '/loginPage';
           }
           return null;
         },

@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
@@ -38,6 +39,12 @@ class GameCreationModel extends FlutterFlowModel<GameCreationWidget> {
           int index, Function(LatLng) updateFn) =>
       generatedListOfAddress[index] = updateFn(generatedListOfAddress[index]);
 
+  UsersRecord? userInf;
+
+  LatLng? userLocation;
+
+  String categories = '0';
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for GoogleMap widget.
@@ -48,8 +55,8 @@ class GameCreationModel extends FlutterFlowModel<GameCreationWidget> {
   // State field(s) for DropDown widget.
   String? dropDownValue1;
   FormFieldController<String>? dropDownValueController1;
-  // Stores action output result for [Backend Call - API (NearbyPlaces)] action in DropDown widget.
-  ApiCallResponse? nearbyPlacesResults;
+  // Stores action output result for [Backend Call - API (fourSquarePlaces)] action in DropDown widget.
+  ApiCallResponse? fourSquarePlaces;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -59,20 +66,11 @@ class GameCreationModel extends FlutterFlowModel<GameCreationWidget> {
   // State field(s) for DropDown widget.
   String? dropDownValue2;
   FormFieldController<String>? dropDownValueController2;
+  DateTime? datePicked;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
-  DateTime? datePicked;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
-
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
 
   @override
   void initState(BuildContext context) {}
@@ -84,8 +82,5 @@ class GameCreationModel extends FlutterFlowModel<GameCreationWidget> {
 
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
-
-    textFieldFocusNode3?.dispose();
-    textController3?.dispose();
   }
 }

@@ -9,6 +9,55 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
+class FindNearbySportsFieldsCall {
+  static Future<ApiCallResponse> call({
+    String? sport = '',
+    String? lat = '',
+    String? lng = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "sport": "${escapeStringForJson(sport)}",
+  "lat": "${escapeStringForJson(lat)}",
+  "lng": "${escapeStringForJson(lng)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'findNearbySportsFields',
+      apiUrl: 'https://getnearbysportsfields-blwudw5m3a-uc.a.run.app',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<double>? lat(dynamic response) => (getJsonField(
+        response,
+        r'''$.elements[:].lat''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? long(dynamic response) => (getJsonField(
+        response,
+        r'''$.elements[:].lon''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+}
+
 class NearbyPlacesCall {
   static Future<ApiCallResponse> call({
     String? keyword,
@@ -22,7 +71,7 @@ class NearbyPlacesCall {
       callType: ApiCallType.GET,
       headers: {},
       params: {
-        'key': "AIzaSyDXC44KBEFOwxcmM4xbMCL7MFbboJjUEVU",
+        'key': "AIzaSyCRIvhrOkPOyRZUtledacKEuY5_D0TENUM",
         'radius': "32186.9",
         'type': "park",
         'location': lating,
@@ -80,55 +129,6 @@ class NearbyPlacesCall {
           .toList();
 }
 
-class FindNearbySportsFieldsCall {
-  static Future<ApiCallResponse> call({
-    String? sport = '',
-    String? lat = '',
-    String? lng = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "sport": "${escapeStringForJson(sport)}",
-  "lat": "${escapeStringForJson(lat)}",
-  "lng": "${escapeStringForJson(lng)}"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'findNearbySportsFields',
-      apiUrl: 'https://getnearbysportsfields-blwudw5m3a-uc.a.run.app',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  static List<double>? lat(dynamic response) => (getJsonField(
-        response,
-        r'''$.elements[:].lat''',
-        true,
-      ) as List?)
-          ?.withoutNulls
-          .map((x) => castToType<double>(x))
-          .withoutNulls
-          .toList();
-  static List<double>? long(dynamic response) => (getJsonField(
-        response,
-        r'''$.elements[:].lon''',
-        true,
-      ) as List?)
-          ?.withoutNulls
-          .map((x) => castToType<double>(x))
-          .withoutNulls
-          .toList();
-}
-
 class CordsToAddressCall {
   static Future<ApiCallResponse> call({
     String? latlng = '',
@@ -140,7 +140,7 @@ class CordsToAddressCall {
       headers: {},
       params: {
         'latlng': latlng,
-        'key': "AIzaSyDXC44KBEFOwxcmM4xbMCL7MFbboJjUEVU",
+        'key': "AIzaSyCRIvhrOkPOyRZUtledacKEuY5_D0TENUM",
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -173,7 +173,7 @@ class AddressToCordsCall {
       headers: {},
       params: {
         'address': address,
-        'key': "AIzaSyDXC44KBEFOwxcmM4xbMCL7MFbboJjUEVU",
+        'key': "AIzaSyCRIvhrOkPOyRZUtledacKEuY5_D0TENUM",
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -192,6 +192,87 @@ class AddressToCordsCall {
         response,
         r'''$.results[:].geometry.location.lng''',
       ));
+}
+
+class TomTomNearbySearchCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'TomTomNearbySearch',
+      apiUrl: 'https://api.tomtom.com/search/2/nearbySearch/.json',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class FourSquarePlacesCall {
+  static Future<ApiCallResponse> call({
+    String? lat = '',
+    String? lng = '',
+    String? categories = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'fourSquarePlaces',
+      apiUrl: 'https://getsportscourts-blwudw5m3a-uc.a.run.app',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'lat': lat,
+        'lng': lng,
+        'categories': categories,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<double>? latitude(dynamic response) => (getJsonField(
+        response,
+        r'''$.results[:].geocodes.main.latitude''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? longitude(dynamic response) => (getJsonField(
+        response,
+        r'''$.results[:].geocodes.main.longitude''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? venueName(dynamic response) => (getJsonField(
+        response,
+        r'''$.results[:].name''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? address(dynamic response) => (getJsonField(
+        response,
+        r'''$.results[:].location.formatted_address''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 class ApiPagingParams {

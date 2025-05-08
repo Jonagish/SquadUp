@@ -85,6 +85,11 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get birthday => _birthday;
   bool hasBirthday() => _birthday != null;
 
+  // "friendsList" field.
+  List<DocumentReference>? _friendsList;
+  List<DocumentReference> get friendsList => _friendsList ?? const [];
+  bool hasFriendsList() => _friendsList != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -100,6 +105,7 @@ class UsersRecord extends FirestoreRecord {
     _zipCode = castToType<int>(snapshotData['zip_code']);
     _height = castToType<int>(snapshotData['height']);
     _birthday = snapshotData['birthday'] as DateTime?;
+    _friendsList = getDataList(snapshotData['friendsList']);
   }
 
   static CollectionReference get collection =>
@@ -178,6 +184,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
 
   @override
   bool equals(UsersRecord? e1, UsersRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
         e1?.photoUrl == e2?.photoUrl &&
@@ -191,7 +198,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.state == e2?.state &&
         e1?.zipCode == e2?.zipCode &&
         e1?.height == e2?.height &&
-        e1?.birthday == e2?.birthday;
+        e1?.birthday == e2?.birthday &&
+        listEquality.equals(e1?.friendsList, e2?.friendsList);
   }
 
   @override
@@ -209,7 +217,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.state,
         e?.zipCode,
         e?.height,
-        e?.birthday
+        e?.birthday,
+        e?.friendsList
       ]);
 
   @override

@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
-import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -9,14 +8,20 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'game_creation_model.dart';
 export 'game_creation_model.dart';
 
 class GameCreationWidget extends StatefulWidget {
-  const GameCreationWidget({super.key});
+  const GameCreationWidget({
+    super.key,
+    required this.userInfo,
+  });
+
+  final DocumentReference? userInfo;
 
   @override
   State<GameCreationWidget> createState() => _GameCreationWidgetState();
@@ -38,6 +43,16 @@ class _GameCreationWidgetState extends State<GameCreationWidget> {
     super.initState();
     _model = createModel(context, () => GameCreationModel());
 
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('GAME_CREATION_game_creation_ON_INIT_STAT');
+      currentUserLocationValue =
+          await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
+      logFirebaseEvent('game_creation_update_component_state');
+      _model.userLocation = currentUserLocationValue;
+      safeSetState(() {});
+    });
+
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     _model.textController1 ??= TextEditingController();
@@ -45,9 +60,6 @@ class _GameCreationWidgetState extends State<GameCreationWidget> {
 
     _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
-
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -78,289 +90,229 @@ class _GameCreationWidgetState extends State<GameCreationWidget> {
       );
     }
 
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        color: Color(0xFFF4C4A4),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(0.0),
-          bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(12.0),
-          topRight: Radius.circular(12.0),
+    return Align(
+      alignment: AlignmentDirectional(0.0, 0.0),
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        constraints: BoxConstraints(
+          maxWidth: 500.0,
         ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Align(
-            alignment: AlignmentDirectional(0.0, -1.0),
-            child: Container(
-              width: double.infinity,
-              height: 200.0,
-              decoration: BoxDecoration(
-                color: Color(0x00FFFFFF),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4.0,
-                    color: Color(0x33000000),
-                    offset: Offset(
-                      0.0,
-                      4.0,
-                    ),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: FlutterFlowGoogleMap(
-                controller: _model.googleMapsController,
-                onCameraIdle: (latLng) => _model.googleMapsCenter = latLng,
-                initialLocation: _model.googleMapsCenter ??=
-                    currentUserLocationValue!,
-                markers: _model.generatedListOfAddress
-                    .map(
-                      (marker) => FlutterFlowMarker(
-                        marker.serialize(),
-                        marker,
-                        () async {
-                          logFirebaseEvent(
-                              'GAME_CREATION_GoogleMap_4hd3fmah_ON_MARK');
-                          logFirebaseEvent('GoogleMap_update_component_state');
-                          _model.cords = _model.googleMapsCenter;
-                          safeSetState(() {});
-                          logFirebaseEvent('GoogleMap_backend_call');
-                          _model.cordsToAddResult =
-                              await CordsToAddressCall.call(
-                            latlng: functions.latLongToString(_model.cords),
-                          );
-
-                          logFirebaseEvent('GoogleMap_update_component_state');
-                          _model.markerAddresses = CordsToAddressCall.address(
-                            (_model.cordsToAddResult?.jsonBody ?? ''),
-                          )!
-                              .toList()
-                              .cast<String>();
-                          safeSetState(() {});
-                          logFirebaseEvent('GoogleMap_update_component_state');
-                          _model.markerAddress = functions
-                              .removeZIPandCOUNTRYTAG(functions.getFirstAddress(
-                                  _model.markerAddresses.toList()))!;
-                          safeSetState(() {});
-
-                          safeSetState(() {});
-                        },
-                      ),
-                    )
-                    .toList(),
-                markerColor: GoogleMarkerColor.violet,
-                mapType: MapType.normal,
-                style: GoogleMapStyle.standard,
-                initialZoom: 14.0,
-                allowInteraction: true,
-                allowZoom: true,
-                showZoomControls: true,
-                showLocation: true,
-                showCompass: false,
-                showMapToolbar: false,
-                showTraffic: false,
-                centerMapOnMarkerTap: true,
-              ),
-            ),
+        decoration: BoxDecoration(
+          color: Color(0xFFF4C4A4),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(0.0),
+            bottomRight: Radius.circular(0.0),
+            topLeft: Radius.circular(12.0),
+            topRight: Radius.circular(12.0),
           ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: FlutterFlowDropDown<String>(
-              controller: _model.dropDownValueController1 ??=
-                  FormFieldController<String>(null),
-              options: [
-                'Basketball',
-                'Soccer',
-                'Volleyball',
-                'Baseball',
-                'Football',
-                'Tennis',
-                'Softball'
-              ],
-              onChanged: (val) async {
-                safeSetState(() => _model.dropDownValue1 = val);
-                logFirebaseEvent('GAME_CREATION_DropDown_ijx3i3op_ON_FORM_');
-                currentUserLocationValue = await getCurrentUserLocation(
-                    defaultLocation: LatLng(0.0, 0.0));
-                logFirebaseEvent('DropDown_backend_call');
-                _model.nearbyPlacesResults = await NearbyPlacesCall.call(
-                  lating: functions.latLongToString(currentUserLocationValue),
-                  keyword: _model.dropDownValue1,
-                );
-
-                logFirebaseEvent('DropDown_update_component_state');
-                _model.generatedListOfAddress = functions
-                    .listDoubleToLatLng(
-                        NearbyPlacesCall.lat(
-                          (_model.nearbyPlacesResults?.jsonBody ?? ''),
-                        )?.toList(),
-                        NearbyPlacesCall.lng(
-                          (_model.nearbyPlacesResults?.jsonBody ?? ''),
-                        )?.toList())!
-                    .toList()
-                    .cast<LatLng>();
-                safeSetState(() {});
-                if (_model.dropDownValue1 == 'Basketball') {
-                  logFirebaseEvent('DropDown_update_component_state');
-                  _model.cardIMG = FFAppConstants.imgBASKETBALL;
-                  safeSetState(() {});
-                } else {
-                  if (_model.dropDownValue1 == 'Soccer') {
-                    logFirebaseEvent('DropDown_update_component_state');
-                    _model.cardIMG = FFAppConstants.imgSoccer;
-                    safeSetState(() {});
-                  }
-                }
-
-                safeSetState(() {});
-              },
-              width: double.infinity,
-              height: 40.0,
-              textStyle: FlutterFlowTheme.of(context).titleLarge.override(
-                    fontFamily: 'Montserrat',
-                    fontSize: 14.0,
-                    letterSpacing: 0.0,
-                  ),
-              hintText: 'Select a Sport...',
-              icon: Icon(
-                Icons.keyboard_arrow_down_rounded,
-                color: FlutterFlowTheme.of(context).secondaryText,
-                size: 24.0,
-              ),
-              fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-              elevation: 2.0,
-              borderColor: Colors.transparent,
-              borderWidth: 0.0,
-              borderRadius: 8.0,
-              margin: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-              hidesUnderline: true,
-              isOverButton: false,
-              isSearchable: false,
-              isMultiSelect: false,
-            ),
-          ),
-          Text(
-            'Enter Address or Pick from Map',
-            style: FlutterFlowTheme.of(context).titleSmall.override(
-                  fontFamily: 'Montserrat',
-                  fontSize: 14.0,
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.bold,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Align(
+              alignment: AlignmentDirectional(0.0, 0.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(0.0),
+                  bottomRight: Radius.circular(0.0),
+                  topLeft: Radius.circular(12.0),
+                  topRight: Radius.circular(12.0),
                 ),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(16.0),
                 child: Container(
-                  width: 200.0,
-                  child: TextFormField(
-                    controller: _model.textController1,
-                    focusNode: _model.textFieldFocusNode1,
-                    autofocus: false,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      labelStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
-                      hintText: 'Address...',
-                      hintStyle:
-                          FlutterFlowTheme.of(context).bodySmall.override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          width: 1.0,
+                  width: double.infinity,
+                  height: 250.0,
+                  decoration: BoxDecoration(
+                    color: Color(0x00FFFFFF),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 4.0,
+                        color: Color(0x33000000),
+                        offset: Offset(
+                          0.0,
+                          4.0,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0x00000000),
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      filled: true,
-                      fillColor: Color(0x00FFFFFF),
+                      )
+                    ],
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                      topLeft: Radius.circular(12.0),
+                      topRight: Radius.circular(12.0),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          fontSize: 12.0,
-                          letterSpacing: 0.0,
-                        ),
-                    cursorColor: FlutterFlowTheme.of(context).primaryText,
-                    validator:
-                        _model.textController1Validator.asValidator(context),
+                  ),
+                  alignment: AlignmentDirectional(0.0, 1.0),
+                  child: FlutterFlowGoogleMap(
+                    controller: _model.googleMapsController,
+                    onCameraIdle: (latLng) => _model.googleMapsCenter = latLng,
+                    initialLocation: _model.googleMapsCenter ??=
+                        currentUserLocationValue!,
+                    markers: _model.generatedListOfAddress
+                        .map(
+                          (marker) => FlutterFlowMarker(
+                            marker.serialize(),
+                            marker,
+                            () async {
+                              logFirebaseEvent(
+                                  'GAME_CREATION_GoogleMap_4hd3fmah_ON_MARK');
+                              logFirebaseEvent(
+                                  'GoogleMap_update_component_state');
+                              _model.cords = _model.googleMapsCenter;
+                              safeSetState(() {});
+                              logFirebaseEvent('GoogleMap_backend_call');
+                              _model.cordsToAddResult =
+                                  await CordsToAddressCall.call(
+                                latlng: functions.latLongToString(_model.cords),
+                              );
+
+                              logFirebaseEvent(
+                                  'GoogleMap_update_component_state');
+                              _model.markerAddresses =
+                                  CordsToAddressCall.address(
+                                (_model.cordsToAddResult?.jsonBody ?? ''),
+                              )!
+                                      .toList()
+                                      .cast<String>();
+                              safeSetState(() {});
+                              logFirebaseEvent(
+                                  'GoogleMap_update_component_state');
+                              _model.markerAddress =
+                                  functions.removeZIPandCOUNTRYTAG(
+                                      functions.getFirstAddress(
+                                          _model.markerAddresses.toList()))!;
+                              safeSetState(() {});
+
+                              safeSetState(() {});
+                            },
+                          ),
+                        )
+                        .toList(),
+                    markerColor: GoogleMarkerColor.orange,
+                    mapType: MapType.normal,
+                    style: GoogleMapStyle.standard,
+                    initialZoom: 10.0,
+                    allowInteraction: true,
+                    allowZoom: true,
+                    showZoomControls: true,
+                    showLocation: true,
+                    showCompass: false,
+                    showMapToolbar: false,
+                    showTraffic: false,
+                    centerMapOnMarkerTap: true,
                   ),
                 ),
               ),
-              FlutterFlowIconButton(
-                borderRadius: 16.0,
-                buttonSize: 40.0,
-                fillColor: FlutterFlowTheme.of(context).primary,
-                icon: Icon(
-                  Icons.add,
-                  color: FlutterFlowTheme.of(context).info,
-                  size: 24.0,
-                ),
-                onPressed: () async {
-                  logFirebaseEvent('GAME_CREATION_COMP_add_ICN_ON_TAP');
-                  logFirebaseEvent('IconButton_backend_call');
-                  _model.cordsFromAdd = await AddressToCordsCall.call(
-                    address: _model.textController1.text,
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: FlutterFlowDropDown<String>(
+                controller: _model.dropDownValueController1 ??=
+                    FormFieldController<String>(null),
+                options: [
+                  'Basketball',
+                  'Soccer',
+                  'Volleyball',
+                  'Baseball',
+                  'Football',
+                  'Tennis',
+                  'Softball'
+                ],
+                onChanged: (val) async {
+                  safeSetState(() => _model.dropDownValue1 = val);
+                  logFirebaseEvent('GAME_CREATION_DropDown_ijx3i3op_ON_FORM_');
+                  if (_model.dropDownValue1 == 'Basketball') {
+                    logFirebaseEvent('DropDown_update_component_state');
+                    _model.cardIMG = FFAppConstants.imgBASKETBALL;
+                    _model.categories = '18008';
+                    _model.generatedListOfAddress = [];
+                    safeSetState(() {});
+                  } else {
+                    if (_model.dropDownValue1 == 'Soccer') {
+                      logFirebaseEvent('DropDown_update_component_state');
+                      _model.cardIMG = FFAppConstants.imgSoccer;
+                      _model.categories = '18064';
+                      _model.generatedListOfAddress = [];
+                      safeSetState(() {});
+                    } else {
+                      if (_model.dropDownValue1 == 'Volleyball') {
+                        logFirebaseEvent('DropDown_update_component_state');
+                        _model.cardIMG = FFAppConstants.imgVolleyball;
+                        _model.categories = '18066';
+                        _model.generatedListOfAddress = [];
+                        safeSetState(() {});
+                      } else {
+                        if (_model.dropDownValue1 == 'Tennis') {
+                          logFirebaseEvent('DropDown_update_component_state');
+                          _model.cardIMG = FFAppConstants.imgTennis;
+                          _model.categories = '18047';
+                          _model.generatedListOfAddress = [];
+                          safeSetState(() {});
+                        } else {
+                          if (_model.dropDownValue1 == 'Baseball') {
+                            logFirebaseEvent('DropDown_update_component_state');
+                            _model.cardIMG = FFAppConstants.imgBaseball;
+                            _model.categories = '18004';
+                            _model.generatedListOfAddress = [];
+                            safeSetState(() {});
+                          } else {
+                            if (_model.dropDownValue1 == 'Football') {
+                              logFirebaseEvent(
+                                  'DropDown_update_component_state');
+                              _model.cardIMG = FFAppConstants.imgFootball;
+                              _model.categories = '18015';
+                              _model.generatedListOfAddress = [];
+                              safeSetState(() {});
+                            } else {
+                              if (_model.dropDownValue1 == 'Softball') {
+                                logFirebaseEvent(
+                                    'DropDown_update_component_state');
+                                _model.cardIMG = FFAppConstants.imgSoftball;
+                                _model.categories = '18004';
+                                _model.generatedListOfAddress = [];
+                                safeSetState(() {});
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  logFirebaseEvent('DropDown_backend_call');
+                  _model.fourSquarePlaces = await FourSquarePlacesCall.call(
+                    lat: functions.latToString(_model.userLocation),
+                    lng: functions.lngToString(_model.userLocation),
+                    categories: _model.categories,
                   );
 
-                  if ((_model.cordsFromAdd?.succeeded ?? true)) {
-                    logFirebaseEvent('IconButton_update_component_state');
-                    _model
-                        .addToGeneratedListOfAddress(functions.doublesToLatLng(
-                            AddressToCordsCall.lat(
-                              (_model.cordsFromAdd?.jsonBody ?? ''),
-                            ),
-                            AddressToCordsCall.lng(
-                              (_model.cordsFromAdd?.jsonBody ?? ''),
-                            ))!);
-                    _model.markerAddress = _model.textController1.text;
-                    _model.cords = functions.doublesToLatLng(
-                        AddressToCordsCall.lat(
-                          (_model.cordsFromAdd?.jsonBody ?? ''),
-                        ),
-                        AddressToCordsCall.lng(
-                          (_model.cordsFromAdd?.jsonBody ?? ''),
-                        ));
+                  if ((_model.fourSquarePlaces?.succeeded ?? true) == true) {
+                    logFirebaseEvent('DropDown_update_component_state');
+                    _model.generatedListOfAddress = functions
+                        .listDoubleToLatLng(
+                            FourSquarePlacesCall.latitude(
+                              (_model.fourSquarePlaces?.jsonBody ?? ''),
+                            )?.toList(),
+                            FourSquarePlacesCall.longitude(
+                              (_model.fourSquarePlaces?.jsonBody ?? ''),
+                            )?.toList())!
+                        .toList()
+                        .cast<LatLng>();
+                    safeSetState(() {});
+                    logFirebaseEvent('DropDown_google_map');
+                    await _model.googleMapsController.future.then(
+                      (c) => c.animateCamera(
+                        CameraUpdate.newLatLng(_model
+                            .generatedListOfAddress.firstOrNull!
+                            .toGoogleMaps()),
+                      ),
+                    );
                   } else {
-                    logFirebaseEvent('IconButton_show_snack_bar');
+                    logFirebaseEvent('DropDown_show_snack_bar');
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          '',
+                          'failed request',
                           style: TextStyle(
                             color: FlutterFlowTheme.of(context).primaryText,
                           ),
@@ -373,176 +325,336 @@ class _GameCreationWidgetState extends State<GameCreationWidget> {
 
                   safeSetState(() {});
                 },
-              ),
-            ],
-          ),
-          Text(
-            _model.markerAddress,
-            style: FlutterFlowTheme.of(context).titleMedium.override(
-                  fontFamily: 'Montserrat',
-                  fontSize: 16.0,
-                  letterSpacing: 0.0,
-                ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: FlutterFlowDropDown<String>(
-                    controller: _model.dropDownValueController2 ??=
-                        FormFieldController<String>(null),
-                    options: ['INDOOR', 'OUTDOOR'],
-                    onChanged: (val) =>
-                        safeSetState(() => _model.dropDownValue2 = val),
-                    width: 100.0,
-                    height: 35.0,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Montserrat',
-                          fontSize: 11.0,
-                          letterSpacing: 0.0,
-                        ),
-                    hintText: 'Setting...',
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: FlutterFlowTheme.of(context).primary,
-                      size: 24.0,
-                    ),
-                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                    elevation: 2.0,
-                    borderColor: Colors.transparent,
-                    borderWidth: 0.0,
-                    borderRadius: 12.0,
-                    margin:
-                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                    hidesUnderline: true,
-                    isOverButton: false,
-                    isSearchable: false,
-                    isMultiSelect: false,
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Container(
-                      width: 100.0,
-                      child: TextFormField(
-                        controller: _model.textController2,
-                        focusNode: _model.textFieldFocusNode2,
-                        autofocus: false,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          isDense: true,
-                          labelStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Inter',
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                          hintText: '# Players',
-                          hintStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 11.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          filled: true,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              fontSize: 11.0,
-                              letterSpacing: 0.0,
-                              lineHeight: 1.0,
-                            ),
-                        maxLines: null,
-                        cursorColor: FlutterFlowTheme.of(context).primaryText,
-                        validator: _model.textController2Validator
-                            .asValidator(context),
+                width: double.infinity,
+                height: 40.0,
+                textStyle: FlutterFlowTheme.of(context).titleLarge.override(
+                      font: GoogleFonts.montserrat(
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleLarge.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleLarge.fontStyle,
                       ),
+                      fontSize: 14.0,
+                      letterSpacing: 0.0,
+                      fontWeight:
+                          FlutterFlowTheme.of(context).titleLarge.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).titleLarge.fontStyle,
+                    ),
+                hintText: 'Select a Sport...',
+                icon: Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 24.0,
+                ),
+                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                elevation: 2.0,
+                borderColor: FlutterFlowTheme.of(context).primaryText,
+                borderWidth: 0.5,
+                borderRadius: 8.0,
+                margin: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                hidesUnderline: true,
+                isOverButton: false,
+                isSearchable: false,
+                isMultiSelect: false,
+              ),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(
+                  'Enter Address or Pick from Map',
+                  style: FlutterFlowTheme.of(context).titleSmall.override(
+                        font: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.bold,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                        fontSize: 14.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.bold,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                      ),
+                ),
+                Text(
+                  'Click Map Marker for more accurate address',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        font: GoogleFonts.roboto(
+                          fontWeight: FontWeight.w500,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
+                        fontSize: 10.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w500,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                      ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Container(
+                    width: 200.0,
+                    child: TextFormField(
+                      controller: _model.textController1,
+                      focusNode: _model.textFieldFocusNode1,
+                      autofocus: false,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
+                        hintText: 'Address...',
+                        hintStyle:
+                            FlutterFlowTheme.of(context).bodySmall.override(
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .fontStyle,
+                                ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0x00000000),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor: Color(0x00FFFFFF),
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            font: GoogleFonts.inter(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                            fontSize: 12.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                      cursorColor: FlutterFlowTheme.of(context).primaryText,
+                      validator:
+                          _model.textController1Validator.asValidator(context),
                     ),
                   ),
                 ),
-                FFButtonWidget(
+                FlutterFlowIconButton(
+                  borderRadius: 16.0,
+                  buttonSize: 40.0,
+                  fillColor: FlutterFlowTheme.of(context).primary,
+                  icon: Icon(
+                    Icons.add,
+                    color: FlutterFlowTheme.of(context).info,
+                    size: 24.0,
+                  ),
                   onPressed: () async {
-                    logFirebaseEvent('GAME_CREATION_PICK_DATE_TIME_BTN_ON_TAP');
-                    logFirebaseEvent('Button_date_time_picker');
-                    final _datePickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: getCurrentTimestamp,
-                      firstDate: getCurrentTimestamp,
-                      lastDate: DateTime(2050),
-                      builder: (context, child) {
-                        return wrapInMaterialDatePickerTheme(
-                          context,
-                          child!,
-                          headerBackgroundColor:
-                              FlutterFlowTheme.of(context).primary,
-                          headerForegroundColor:
-                              FlutterFlowTheme.of(context).info,
-                          headerTextStyle: FlutterFlowTheme.of(context)
-                              .headlineLarge
-                              .override(
-                                fontFamily: 'Montserrat',
-                                fontSize: 32.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                          pickerBackgroundColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          pickerForegroundColor:
-                              FlutterFlowTheme.of(context).primaryText,
-                          selectedDateTimeBackgroundColor:
-                              FlutterFlowTheme.of(context).primary,
-                          selectedDateTimeForegroundColor:
-                              FlutterFlowTheme.of(context).info,
-                          actionButtonForegroundColor:
-                              FlutterFlowTheme.of(context).primaryText,
-                          iconSize: 24.0,
-                        );
-                      },
+                    logFirebaseEvent('GAME_CREATION_COMP_add_ICN_ON_TAP');
+                    logFirebaseEvent('IconButton_backend_call');
+                    _model.cordsFromAdd = await AddressToCordsCall.call(
+                      address: _model.textController1.text,
                     );
 
-                    TimeOfDay? _datePickedTime;
-                    if (_datePickedDate != null) {
-                      _datePickedTime = await showTimePicker(
+                    if ((_model.cordsFromAdd?.succeeded ?? true)) {
+                      logFirebaseEvent('IconButton_update_component_state');
+                      _model.addToGeneratedListOfAddress(
+                          functions.doublesToLatLng(
+                              AddressToCordsCall.lat(
+                                (_model.cordsFromAdd?.jsonBody ?? ''),
+                              ),
+                              AddressToCordsCall.lng(
+                                (_model.cordsFromAdd?.jsonBody ?? ''),
+                              ))!);
+                      _model.markerAddress = _model.textController1.text;
+                      _model.cords = functions.doublesToLatLng(
+                          AddressToCordsCall.lat(
+                            (_model.cordsFromAdd?.jsonBody ?? ''),
+                          ),
+                          AddressToCordsCall.lng(
+                            (_model.cordsFromAdd?.jsonBody ?? ''),
+                          ));
+                      logFirebaseEvent('IconButton_google_map');
+                      await _model.googleMapsController.future.then(
+                        (c) => c.animateCamera(
+                          CameraUpdate.newLatLng(functions
+                              .doublesToLatLng(
+                                  AddressToCordsCall.lat(
+                                    (_model.cordsFromAdd?.jsonBody ?? ''),
+                                  ),
+                                  AddressToCordsCall.lng(
+                                    (_model.cordsFromAdd?.jsonBody ?? ''),
+                                  ))!
+                              .toGoogleMaps()),
+                        ),
+                      );
+                    } else {
+                      logFirebaseEvent('IconButton_show_snack_bar');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            '',
+                            style: TextStyle(
+                              color: FlutterFlowTheme.of(context).primaryText,
+                            ),
+                          ),
+                          duration: Duration(milliseconds: 4000),
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).secondary,
+                        ),
+                      );
+                    }
+
+                    safeSetState(() {});
+                  },
+                ),
+              ],
+            ),
+            Text(
+              _model.markerAddress,
+              style: FlutterFlowTheme.of(context).titleMedium.override(
+                    font: GoogleFonts.montserrat(
+                      fontWeight:
+                          FlutterFlowTheme.of(context).titleMedium.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).titleMedium.fontStyle,
+                    ),
+                    fontSize: 16.0,
+                    letterSpacing: 0.0,
+                    fontWeight:
+                        FlutterFlowTheme.of(context).titleMedium.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).titleMedium.fontStyle,
+                  ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(12.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    child: FlutterFlowDropDown<String>(
+                      controller: _model.dropDownValueController2 ??=
+                          FormFieldController<String>(null),
+                      options: ['INDOOR', 'OUTDOOR'],
+                      onChanged: (val) =>
+                          safeSetState(() => _model.dropDownValue2 = val),
+                      width: 100.0,
+                      height: 35.0,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                font: GoogleFonts.montserrat(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
+                                ),
+                                fontSize: 11.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontStyle,
+                              ),
+                      hintText: 'Setting...',
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: FlutterFlowTheme.of(context).primary,
+                        size: 24.0,
+                      ),
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      elevation: 2.0,
+                      borderColor: Colors.transparent,
+                      borderWidth: 0.0,
+                      borderRadius: 12.0,
+                      margin:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                      hidesUnderline: true,
+                      isOverButton: false,
+                      isSearchable: false,
+                      isMultiSelect: false,
+                    ),
+                  ),
+                  FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'GAME_CREATION_PICK_DATE_TIME_BTN_ON_TAP');
+                      logFirebaseEvent('Button_date_time_picker');
+                      final _datePickedDate = await showDatePicker(
                         context: context,
-                        initialTime:
-                            TimeOfDay.fromDateTime(getCurrentTimestamp),
+                        initialDate: getCurrentTimestamp,
+                        firstDate: getCurrentTimestamp,
+                        lastDate: DateTime(2050),
                         builder: (context, child) {
-                          return wrapInMaterialTimePickerTheme(
+                          return wrapInMaterialDatePickerTheme(
                             context,
                             child!,
                             headerBackgroundColor:
@@ -552,10 +664,18 @@ class _GameCreationWidgetState extends State<GameCreationWidget> {
                             headerTextStyle: FlutterFlowTheme.of(context)
                                 .headlineLarge
                                 .override(
-                                  fontFamily: 'Montserrat',
+                                  font: GoogleFonts.montserrat(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .headlineLarge
+                                        .fontStyle,
+                                  ),
                                   fontSize: 32.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .headlineLarge
+                                      .fontStyle,
                                 ),
                             pickerBackgroundColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -571,132 +691,141 @@ class _GameCreationWidgetState extends State<GameCreationWidget> {
                           );
                         },
                       );
-                    }
 
-                    if (_datePickedDate != null && _datePickedTime != null) {
-                      safeSetState(() {
-                        _model.datePicked = DateTime(
-                          _datePickedDate.year,
-                          _datePickedDate.month,
-                          _datePickedDate.day,
-                          _datePickedTime!.hour,
-                          _datePickedTime.minute,
+                      TimeOfDay? _datePickedTime;
+                      if (_datePickedDate != null) {
+                        _datePickedTime = await showTimePicker(
+                          context: context,
+                          initialTime:
+                              TimeOfDay.fromDateTime(getCurrentTimestamp),
+                          builder: (context, child) {
+                            return wrapInMaterialTimePickerTheme(
+                              context,
+                              child!,
+                              headerBackgroundColor:
+                                  FlutterFlowTheme.of(context).primary,
+                              headerForegroundColor:
+                                  FlutterFlowTheme.of(context).info,
+                              headerTextStyle: FlutterFlowTheme.of(context)
+                                  .headlineLarge
+                                  .override(
+                                    font: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineLarge
+                                          .fontStyle,
+                                    ),
+                                    fontSize: 32.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .headlineLarge
+                                        .fontStyle,
+                                  ),
+                              pickerBackgroundColor:
+                                  FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                              pickerForegroundColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              selectedDateTimeBackgroundColor:
+                                  FlutterFlowTheme.of(context).primary,
+                              selectedDateTimeForegroundColor:
+                                  FlutterFlowTheme.of(context).info,
+                              actionButtonForegroundColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              iconSize: 24.0,
+                            );
+                          },
                         );
-                      });
-                    } else if (_model.datePicked != null) {
-                      safeSetState(() {
-                        _model.datePicked = getCurrentTimestamp;
-                      });
-                    }
-                  },
-                  text: valueOrDefault<String>(
-                    dateTimeFormat("M/d H:mm", _model.datePicked),
-                    'Pick Date & Time',
-                  ),
-                  icon: Icon(
-                    Icons.date_range,
-                    size: 15.0,
-                  ),
-                  options: FFButtonOptions(
-                    height: 35.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Montserrat',
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          fontSize: 12.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                    elevation: 0.0,
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                      width: 0.5,
+                      }
+
+                      if (_datePickedDate != null && _datePickedTime != null) {
+                        safeSetState(() {
+                          _model.datePicked = DateTime(
+                            _datePickedDate.year,
+                            _datePickedDate.month,
+                            _datePickedDate.day,
+                            _datePickedTime!.hour,
+                            _datePickedTime.minute,
+                          );
+                        });
+                      } else if (_model.datePicked != null) {
+                        safeSetState(() {
+                          _model.datePicked = getCurrentTimestamp;
+                        });
+                      }
+                    },
+                    text: valueOrDefault<String>(
+                      dateTimeFormat("M/d H:mm", _model.datePicked),
+                      'Pick Date & Time',
                     ),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Banner Image ',
-                textAlign: TextAlign.start,
-                style: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: 'Montserrat',
-                      fontSize: 13.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.bold,
+                    icon: Icon(
+                      Icons.date_range,
+                      size: 15.0,
                     ),
+                    options: FFButtonOptions(
+                      width: 165.0,
+                      height: 35.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                font: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
+                                ),
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 12.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontStyle,
+                              ),
+                      elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                ],
               ),
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  logFirebaseEvent('GAME_CREATION_COMP_Image_4wc3e1kx_ON_TAP');
-                  logFirebaseEvent('Container_upload_media_to_firebase');
-                  final selectedMedia = await selectMediaWithSourceBottomSheet(
-                    context: context,
-                    allowPhoto: true,
-                  );
-                  if (selectedMedia != null &&
-                      selectedMedia.every(
-                          (m) => validateFileFormat(m.storagePath, context))) {
-                    safeSetState(() => _model.isDataUploading = true);
-                    var selectedUploadedFiles = <FFUploadedFile>[];
-
-                    var downloadUrls = <String>[];
-                    try {
-                      selectedUploadedFiles = selectedMedia
-                          .map((m) => FFUploadedFile(
-                                name: m.storagePath.split('/').last,
-                                bytes: m.bytes,
-                                height: m.dimensions?.height,
-                                width: m.dimensions?.width,
-                                blurHash: m.blurHash,
-                              ))
-                          .toList();
-
-                      downloadUrls = (await Future.wait(
-                        selectedMedia.map(
-                          (m) async => await uploadData(m.storagePath, m.bytes),
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Banner Image ',
+                  textAlign: TextAlign.start,
+                  style: FlutterFlowTheme.of(context).titleSmall.override(
+                        font: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.bold,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
                         ),
-                      ))
-                          .where((u) => u != null)
-                          .map((u) => u!)
-                          .toList();
-                    } finally {
-                      _model.isDataUploading = false;
-                    }
-                    if (selectedUploadedFiles.length == selectedMedia.length &&
-                        downloadUrls.length == selectedMedia.length) {
-                      safeSetState(() {
-                        _model.uploadedLocalFile = selectedUploadedFiles.first;
-                        _model.uploadedFileUrl = downloadUrls.first;
-                      });
-                    } else {
-                      safeSetState(() {});
-                      return;
-                    }
-                  }
-                },
-                child: Container(
+                        fontSize: 13.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.bold,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                      ),
+                ),
+                Container(
                   width: 40.0,
                   height: 40.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      alignment: AlignmentDirectional(1.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       image: Image.network(
                         _model.cardIMG,
                       ).image,
@@ -709,168 +838,203 @@ class _GameCreationWidgetState extends State<GameCreationWidget> {
                     ),
                   ),
                 ),
-              ),
-            ].divide(SizedBox(width: 12.0)),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Color(0x00FFFFFF),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4.0,
-                    color: Color(0x33000000),
-                    offset: Offset(
-                      0.0,
-                      4.0,
-                    ),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(12.0),
-              ),
+              ].divide(SizedBox(width: 12.0)),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
               child: Container(
                 width: double.infinity,
-                child: TextFormField(
-                  controller: _model.textController3,
-                  focusNode: _model.textFieldFocusNode3,
-                  autofocus: false,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    isDense: true,
-                    labelStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Inter',
-                          color: FlutterFlowTheme.of(context).primary,
-                          fontSize: 13.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                    alignLabelWithHint: false,
-                    hintText: 'Add a description (optional)',
-                    hintStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
+                decoration: BoxDecoration(
+                  color: Color(0x00FFFFFF),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4.0,
+                      color: Color(0x33000000),
+                      offset: Offset(
+                        0.0,
+                        4.0,
+                      ),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: Container(
+                  width: double.infinity,
+                  child: TextFormField(
+                    controller: _model.textController2,
+                    focusNode: _model.textFieldFocusNode2,
+                    autofocus: false,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      labelStyle:
+                          FlutterFlowTheme.of(context).bodyLarge.override(
+                                font: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .fontStyle,
+                                ),
+                                color: FlutterFlowTheme.of(context).primary,
+                                fontSize: 13.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .fontStyle,
+                              ),
+                      alignLabelWithHint: false,
+                      hintText: 'Add a description',
+                      hintStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.override(
+                                font: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                                color: Color(0xFF8F8F8F),
+                                fontSize: 12.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                                lineHeight: 2.0,
+                              ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
                           color: Color(0xFF8F8F8F),
+                          width: 0.5,
+                        ),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 0.5,
+                        ),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).error,
+                          width: 0.5,
+                        ),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).error,
+                          width: 0.5,
+                        ),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          font: GoogleFonts.inter(
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
                           fontSize: 12.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w600,
-                          lineHeight: 2.0,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xFF8F8F8F),
-                        width: 0.5,
-                      ),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 0.5,
-                      ),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 0.5,
-                      ),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 0.5,
-                      ),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
+                    textAlign: TextAlign.start,
+                    maxLines: 3,
+                    cursorColor: FlutterFlowTheme.of(context).primaryText,
+                    validator:
+                        _model.textController2Validator.asValidator(context),
                   ),
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Inter',
-                        fontSize: 12.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w600,
-                      ),
-                  textAlign: TextAlign.start,
-                  maxLines: 3,
-                  cursorColor: FlutterFlowTheme.of(context).primaryText,
-                  validator:
-                      _model.textController3Validator.asValidator(context),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0x00FFFFFF),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4.0,
-                    color: Color(0x33000000),
-                    offset: Offset(
-                      0.0,
-                      5.0,
-                    ),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: FFButtonWidget(
-                onPressed: () async {
-                  logFirebaseEvent('GAME_CREATION_COMP_CREATE_BTN_ON_TAP');
-                  logFirebaseEvent('Button_backend_call');
-
-                  await CreatedGamesRecord.collection.doc().set({
-                    ...createCreatedGamesRecordData(
-                      location: _model.cords,
-                      address: _model.markerAddress,
-                      details: _model.textController3.text,
-                      sport: _model.dropDownValue1,
-                      cardImage: _model.cardIMG,
-                      peoplePlaying: int.tryParse(_model.textController2.text),
-                      dateGame: _model.datePicked,
-                      setting: _model.dropDownValue2,
-                      hostUsername: currentUserDisplayName,
-                    ),
-                    ...mapToFirestore(
-                      {
-                        'created_time': FieldValue.serverTimestamp(),
-                      },
-                    ),
-                  });
-                  logFirebaseEvent('Button_bottom_sheet');
-                  Navigator.pop(context);
-                },
-                text: 'Create',
-                options: FFButtonOptions(
-                  width: double.infinity,
-                  height: 50.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Montserrat',
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        fontSize: 18.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.bold,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0x00FFFFFF),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4.0,
+                      color: Color(0x33000000),
+                      offset: Offset(
+                        0.0,
+                        5.0,
                       ),
-                  elevation: 0.0,
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                    width: 0.5,
-                  ),
+                    )
+                  ],
                   borderRadius: BorderRadius.circular(12.0),
                 ),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    logFirebaseEvent('GAME_CREATION_COMP_Create_Button_ON_TAP');
+                    logFirebaseEvent('Create_Button_backend_call');
+
+                    await CreatedGamesRecord.collection.doc().set({
+                      ...createCreatedGamesRecordData(
+                        location: _model.cords,
+                        address: _model.markerAddress,
+                        details: _model.textController2.text,
+                        sport: _model.dropDownValue1,
+                        cardImage: _model.cardIMG,
+                        peoplePlaying: 1,
+                        dateGame: _model.datePicked,
+                        setting: _model.dropDownValue2,
+                        hostUsername: currentUserDisplayName,
+                        userRef: currentUserReference,
+                      ),
+                      ...mapToFirestore(
+                        {
+                          'created_time': FieldValue.serverTimestamp(),
+                          'list_players': [currentUserReference],
+                        },
+                      ),
+                    });
+                    logFirebaseEvent('Create_Button_bottom_sheet');
+                    Navigator.pop(context);
+                  },
+                  text: 'Create',
+                  options: FFButtonOptions(
+                    width: double.infinity,
+                    height: 50.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
+                          ),
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          fontSize: 18.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.bold,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                    elevation: 0.0,
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 0.5,
+                    ),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

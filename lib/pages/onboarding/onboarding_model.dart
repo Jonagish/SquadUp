@@ -2,9 +2,13 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'onboarding_widget.dart' show OnboardingWidget;
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class OnboardingModel extends FlutterFlowModel<OnboardingWidget> {
+  ///  Local state fields for this page.
+
+  String defaultUserIMG =
+      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/k1yn8LIMKtosHMzouKDa/assets/krpvfm3neg81/profile-icon-design-free-vector.jpg';
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for username widget.
@@ -20,15 +24,6 @@ class OnboardingModel extends FlutterFlowModel<OnboardingWidget> {
   TextEditingController? lastNameTextController;
   String? Function(BuildContext, String?)? lastNameTextControllerValidator;
   DateTime? datePicked;
-  // State field(s) for height widget.
-  FocusNode? heightFocusNode;
-  TextEditingController? heightTextController;
-  final heightMask = MaskTextInputFormatter(mask: '#\'##\"');
-  String? Function(BuildContext, String?)? heightTextControllerValidator;
-  // State field(s) for weight widget.
-  FocusNode? weightFocusNode;
-  TextEditingController? weightTextController;
-  String? Function(BuildContext, String?)? weightTextControllerValidator;
   // State field(s) for city widget.
   FocusNode? cityFocusNode;
   TextEditingController? cityTextController;
@@ -37,19 +32,10 @@ class OnboardingModel extends FlutterFlowModel<OnboardingWidget> {
   FocusNode? stateFocusNode;
   TextEditingController? stateTextController;
   String? Function(BuildContext, String?)? stateTextControllerValidator;
-  // State field(s) for zipCode widget.
-  FocusNode? zipCodeFocusNode;
-  TextEditingController? zipCodeTextController;
-  String? Function(BuildContext, String?)? zipCodeTextControllerValidator;
-  bool isDataUploading1 = false;
-  FFUploadedFile uploadedLocalFile1 =
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl1 = '';
-
-  bool isDataUploading2 = false;
-  FFUploadedFile uploadedLocalFile2 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl2 = '';
+  String uploadedFileUrl = '';
 
   @override
   void initState(BuildContext context) {}
@@ -65,19 +51,10 @@ class OnboardingModel extends FlutterFlowModel<OnboardingWidget> {
     lastNameFocusNode?.dispose();
     lastNameTextController?.dispose();
 
-    heightFocusNode?.dispose();
-    heightTextController?.dispose();
-
-    weightFocusNode?.dispose();
-    weightTextController?.dispose();
-
     cityFocusNode?.dispose();
     cityTextController?.dispose();
 
     stateFocusNode?.dispose();
     stateTextController?.dispose();
-
-    zipCodeFocusNode?.dispose();
-    zipCodeTextController?.dispose();
   }
 }

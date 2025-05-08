@@ -76,3 +76,71 @@ String? removeZIPandCOUNTRYTAG(String? address) {
       .join(',')
       .trim(); // Join remaining parts and return
 }
+
+List<LatLng>? allLatLngInRadius(
+  LatLng? currentLocation,
+  List<LatLng>? listOfLatLng,
+) {
+  if (currentLocation == null || listOfLatLng == null) {
+    return null;
+  }
+
+  const double radiusInMiles = 20.0;
+  const double earthRadiusMiles = 3958.8;
+  List<LatLng> locationsInRadius = [];
+
+  for (LatLng location in listOfLatLng) {
+    // Inline Haversine calculation
+    final double lat1 = currentLocation.latitude * (math.pi / 180.0);
+    final double lon1 = currentLocation.longitude * (math.pi / 180.0);
+    final double lat2 = location.latitude * (math.pi / 180.0);
+    final double lon2 = location.longitude * (math.pi / 180.0);
+
+    final double dLat = lat2 - lat1;
+    final double dLon = lon2 - lon1;
+
+    final double a = math.pow(math.sin(dLat / 2), 2) +
+        math.cos(lat1) * math.cos(lat2) * math.pow(math.sin(dLon / 2), 2);
+    final double c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
+
+    final double distance = earthRadiusMiles * c;
+
+    if (distance <= radiusInMiles) {
+      locationsInRadius.add(location);
+    }
+  }
+
+  return locationsInRadius;
+}
+
+List<DocumentReference> postInviteUserList(
+  List<DocumentReference> initialList,
+  List<DocumentReference> additionalList,
+) {
+  // output combitination of initialList and additionalList, make sure they're unique
+// Create a set to store unique DocumentReferences
+  final uniqueReferences = <DocumentReference>{};
+
+  // Add all initial references to the set
+  uniqueReferences.addAll(initialList);
+
+  // Add all additional references to the set
+  uniqueReferences.addAll(additionalList);
+
+  // Return the unique references as a list
+  return uniqueReferences.toList();
+}
+
+String? latToString(LatLng? latlng) {
+  // this function should return the latitude as a string
+// return latitude as a string
+  if (latlng == null) {
+    return null; // Return null if latlng is null
+  }
+  return latlng.latitude.toString(); // Return latitude as string
+}
+
+String? lngToString(LatLng? latlng) {
+  // returns the longitude as a string
+  return latlng?.longitude.toString();
+}

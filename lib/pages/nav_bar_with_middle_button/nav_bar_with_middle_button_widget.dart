@@ -1,9 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/game_creation_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'nav_bar_with_middle_button_model.dart';
 export 'nav_bar_with_middle_button_model.dart';
 
@@ -42,6 +44,8 @@ class _NavBarWithMiddleButtonWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: 90.0,
@@ -104,14 +108,29 @@ class _NavBarWithMiddleButtonWidgetState
                 buttonSize: 50.0,
                 icon: Icon(
                   Icons.home_outlined,
-                  color: FlutterFlowTheme.of(context).primaryText,
+                  color: FFAppState().navCondintions == 1
+                      ? FlutterFlowTheme.of(context).accent4
+                      : Color(0xFF0B0B0B),
                   size: 26.0,
                 ),
                 onPressed: () async {
                   logFirebaseEvent('NAV_BAR_WITH_MIDDLE_BUTTON_home_outlined');
                   logFirebaseEvent('IconButton_navigate_to');
 
-                  context.pushNamed(GoldenPathWidget.routeName);
+                  context.pushNamed(
+                    GoldenPathWidget.routeName,
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
+                      ),
+                    },
+                  );
+
+                  logFirebaseEvent('IconButton_update_app_state');
+                  FFAppState().navCondintions = 1;
+                  safeSetState(() {});
                 },
               ),
               FlutterFlowIconButton(
@@ -121,11 +140,25 @@ class _NavBarWithMiddleButtonWidgetState
                 buttonSize: 50.0,
                 icon: Icon(
                   Icons.chat_bubble_outline,
-                  color: FlutterFlowTheme.of(context).primaryText,
+                  color: FFAppState().navCondintions == 2
+                      ? FlutterFlowTheme.of(context).accent4
+                      : Color(0xFF0B0B0B),
                   size: 24.0,
                 ),
-                onPressed: () {
-                  print('IconButton pressed ...');
+                onPressed: () async {
+                  logFirebaseEvent('NAV_BAR_WITH_MIDDLE_BUTTON_chat_bubble_o');
+                  logFirebaseEvent('IconButton_navigate_to');
+
+                  context.pushNamed(
+                    ChatHomeWidget.routeName,
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
+                      ),
+                    },
+                  );
                 },
               ),
               Column(
@@ -136,6 +169,7 @@ class _NavBarWithMiddleButtonWidgetState
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                     child: FlutterFlowIconButton(
+                      key: ValueKey('MiddleButton_o4yp'),
                       borderColor: Colors.transparent,
                       borderRadius: 4.0,
                       borderWidth: 1.0,
@@ -160,7 +194,9 @@ class _NavBarWithMiddleButtonWidgetState
                               padding: MediaQuery.viewInsetsOf(context),
                               child: Container(
                                 height: 680.0,
-                                child: GameCreationWidget(),
+                                child: GameCreationWidget(
+                                  userInfo: currentUserReference!,
+                                ),
                               ),
                             );
                           },
@@ -177,11 +213,29 @@ class _NavBarWithMiddleButtonWidgetState
                 buttonSize: 50.0,
                 icon: Icon(
                   Icons.favorite_border,
-                  color: FlutterFlowTheme.of(context).primaryText,
+                  color: FFAppState().navCondintions == 3
+                      ? FlutterFlowTheme.of(context).accent4
+                      : Color(0xFF0B0B0B),
                   size: 24.0,
                 ),
-                onPressed: () {
-                  print('IconButton pressed ...');
+                onPressed: () async {
+                  logFirebaseEvent('NAV_BAR_WITH_MIDDLE_BUTTON_favorite_bord');
+                  logFirebaseEvent('IconButton_navigate_to');
+
+                  context.pushNamed(
+                    GamesJoinedWidget.routeName,
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
+                      ),
+                    },
+                  );
+
+                  logFirebaseEvent('IconButton_update_app_state');
+                  FFAppState().navCondintions = 3;
+                  safeSetState(() {});
                 },
               ),
               FlutterFlowIconButton(
@@ -191,14 +245,29 @@ class _NavBarWithMiddleButtonWidgetState
                 buttonSize: 50.0,
                 icon: Icon(
                   Icons.settings_outlined,
-                  color: FlutterFlowTheme.of(context).primaryText,
+                  color: FFAppState().navCondintions == 4
+                      ? FlutterFlowTheme.of(context).accent4
+                      : Color(0xFF0B0B0B),
                   size: 24.0,
                 ),
                 onPressed: () async {
                   logFirebaseEvent('NAV_BAR_WITH_MIDDLE_BUTTON_settings_outl');
                   logFirebaseEvent('IconButton_navigate_to');
 
-                  context.pushNamed(SettingsWidget.routeName);
+                  context.pushNamed(
+                    SettingsWidget.routeName,
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
+                      ),
+                    },
+                  );
+
+                  logFirebaseEvent('IconButton_update_app_state');
+                  FFAppState().navCondintions = 4;
+                  safeSetState(() {});
                 },
               ),
             ],

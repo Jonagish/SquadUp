@@ -62,4 +62,10 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInSportFilter(int index, String value) {
     sportFilter.insert(index, value);
   }
+
+  int _navCondintions = 1;
+  int get navCondintions => _navCondintions;
+  set navCondintions(int value) {
+    _navCondintions = value;
+  }
 }

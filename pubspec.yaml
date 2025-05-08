@@ -37,6 +37,7 @@ dependencies:
   collection: 1.19.0
   csslib: 0.17.3
   dropdown_button2: 2.3.9
+  easy_debounce: 2.0.1
   equatable: 2.0.5
   file_picker: 8.1.2
   firebase_analytics: 11.3.5
@@ -76,6 +77,7 @@ dependencies:
   google_maps_flutter_ios: 2.13.0
   google_maps_flutter_platform_interface: 2.9.2
   google_maps_flutter_web: 0.5.10
+  google_mobile_ads: 5.1.0
   google_sign_in: 6.2.1
   google_sign_in_android: 6.1.30
   google_sign_in_ios: 5.7.7
@@ -93,7 +95,6 @@ dependencies:
   image_picker_windows: 0.2.1+1
   intl: 0.19.0
   json_path: 0.7.2
-  mask_text_input_formatter: 2.9.0
   mime_type: 1.0.0
   page_transition: 2.1.0
   path_provider: 2.1.4
@@ -103,6 +104,10 @@ dependencies:
   path_provider_platform_interface: 2.1.2
   path_provider_windows: 2.3.0
   plugin_platform_interface: 2.1.8
+  pointer_interceptor: 0.10.1+2
+  pointer_interceptor_ios: 0.10.1
+  pointer_interceptor_platform_interface: 0.10.0+1
+  pointer_interceptor_web: 0.10.2+1
   provider: 6.1.2
   rxdart: 0.27.7
   shared_preferences: 2.3.2
@@ -118,6 +123,7 @@ dependencies:
   sqflite: 2.3.3+1
   sqflite_common: 2.5.4+3
   stream_transform: 2.1.0
+  text_search: 1.0.1
   timeago: 3.6.1
   url_launcher: 6.3.0
   url_launcher_android: 6.3.10
@@ -184,6 +190,7 @@ flutter:
     - assets/pdfs/
     - assets/jsons/
 
+    - assets/environment_values/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

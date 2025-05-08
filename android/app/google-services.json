@@ -12,15 +12,32 @@
           "package_name": "com.mycompany.squadup"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "385629703208-dri0q18i54cug8uc79hogu44lvfcqobn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDgb5I40JqVggrpLsw0qCEXEGbhGwgUUKk"
+          "current_key": "AIzaSyA2XrT51-27mcZvd1T5EN1DFKL5Lg6HOEA"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385629703208-dri0q18i54cug8uc79hogu44lvfcqobn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "385629703208-064ftjf4fkdatn18v416k32mmrk01jpo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.uricsc305.squadup"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,15 +48,40 @@
           "package_name": "com.uricsc305.squadup"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "385629703208-oui7tkr8k4obq98o59hmrft2kpu83vmv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uricsc305.squadup",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "385629703208-dri0q18i54cug8uc79hogu44lvfcqobn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDgb5I40JqVggrpLsw0qCEXEGbhGwgUUKk"
+          "current_key": "AIzaSyA2XrT51-27mcZvd1T5EN1DFKL5Lg6HOEA"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385629703208-dri0q18i54cug8uc79hogu44lvfcqobn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "385629703208-064ftjf4fkdatn18v416k32mmrk01jpo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.uricsc305.squadup"
+              }
+            }
+          ]
         }
       }
     }

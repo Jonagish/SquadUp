@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'sign_up_page_model.dart';
 export 'sign_up_page_model.dart';
 
@@ -68,11 +69,11 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
               constraints: BoxConstraints(
-                maxWidth: 400.0,
+                maxWidth: 500.0,
               ),
               decoration: BoxDecoration(),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(20.0, 22.0, 20.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -95,10 +96,27 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .displayMedium
                                         .override(
-                                          fontFamily: 'Montserrat',
+                                          font: GoogleFonts.montserrat(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .displayMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .displayMedium
+                                                    .fontStyle,
+                                          ),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
                                           letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .displayMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .displayMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                   Text(
@@ -106,8 +124,25 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .displayMedium
                                         .override(
-                                          fontFamily: 'Montserrat',
+                                          font: GoogleFonts.montserrat(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .displayMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .displayMedium
+                                                    .fontStyle,
+                                          ),
                                           letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .displayMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .displayMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ].divide(SizedBox(width: 8.0)),
@@ -120,10 +155,25 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .displayMedium
                                       .override(
-                                        fontFamily: 'Montserrat',
+                                        font: GoogleFonts.montserrat(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .displayMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .displayMedium
+                                                  .fontStyle,
+                                        ),
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
                                         letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .displayMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .displayMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
@@ -181,23 +231,43 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
-                                          fontFamily: 'Inter',
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontStyle,
+                                          ),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
                                           fontSize: 13.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontStyle,
                                         ),
                                     alignLabelWithHint: false,
                                     hintText: 'Email...',
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Inter',
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
                                           color: Color(0xFF8F8F8F),
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                           lineHeight: 2.0,
                                         ),
                                     enabledBorder: OutlineInputBorder(
@@ -242,10 +312,19 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                         fontSize: 16.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                         lineHeight: 2.0,
                                       ),
                                   textAlign: TextAlign.start,
@@ -290,23 +369,43 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
-                                          fontFamily: 'Inter',
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontStyle,
+                                          ),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
                                           fontSize: 13.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontStyle,
                                         ),
                                     alignLabelWithHint: false,
                                     hintText: 'Password...',
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Inter',
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
                                           color: Color(0xFF8F8F8F),
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                           lineHeight: 2.0,
                                         ),
                                     enabledBorder: OutlineInputBorder(
@@ -360,10 +459,19 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                         fontSize: 16.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                         lineHeight: 2.0,
                                       ),
                                   textAlign: TextAlign.start,
@@ -408,23 +516,43 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
-                                          fontFamily: 'Inter',
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .fontStyle,
+                                          ),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
                                           fontSize: 13.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontStyle,
                                         ),
                                     alignLabelWithHint: false,
                                     hintText: 'Confirm Password...',
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Inter',
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
                                           color: Color(0xFF8F8F8F),
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                           lineHeight: 2.0,
                                         ),
                                     enabledBorder: OutlineInputBorder(
@@ -479,10 +607,19 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                         fontSize: 16.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                         lineHeight: 2.0,
                                       ),
                                   textAlign: TextAlign.start,
@@ -494,92 +631,111 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                 ),
                               ),
                             ),
-                            Container(
-                              width: double.infinity,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                color: Color(0x00FFFFFF),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 4.0,
-                                    color: Color(0x33000000),
-                                    offset: Offset(
-                                      0.0,
-                                      4.0,
-                                    ),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: FFButtonWidget(
-                                key: ValueKey('SignUp_Button_ms4s'),
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'SIGN_UP_PAGE_PAGE_SignUp_Button_ON_TAP');
-                                  logFirebaseEvent('SignUp_Button_auth');
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  if (_model.passwordFieldTextController.text !=
-                                      _model.confirmPassFieldTextController
-                                          .text) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Passwords don\'t match!',
-                                        ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 50.0, 0.0, 0.0),
+                              child: Container(
+                                width: double.infinity,
+                                height: 55.0,
+                                decoration: BoxDecoration(
+                                  color: Color(0x00FFFFFF),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4.0,
+                                      color: Color(0x33000000),
+                                      offset: Offset(
+                                        0.0,
+                                        4.0,
                                       ),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: FFButtonWidget(
+                                  key: ValueKey('SignUp_Button_ms4s'),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'SIGN_UP_PAGE_PAGE_SignUp_Button_ON_TAP');
+                                    logFirebaseEvent('SignUp_Button_auth');
+                                    GoRouter.of(context).prepareAuthEvent();
+                                    if (_model
+                                            .passwordFieldTextController.text !=
+                                        _model.confirmPassFieldTextController
+                                            .text) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Passwords don\'t match!',
+                                          ),
+                                        ),
+                                      );
+                                      return;
+                                    }
+
+                                    final user = await authManager
+                                        .createAccountWithEmail(
+                                      context,
+                                      _model.emailFieldTextController.text,
+                                      _model.passwordFieldTextController.text,
                                     );
-                                    return;
-                                  }
+                                    if (user == null) {
+                                      return;
+                                    }
 
-                                  final user =
-                                      await authManager.createAccountWithEmail(
-                                    context,
-                                    _model.emailFieldTextController.text,
-                                    _model.passwordFieldTextController.text,
-                                  );
-                                  if (user == null) {
-                                    return;
-                                  }
+                                    await UsersRecord.collection
+                                        .doc(user.uid)
+                                        .update(createUsersRecordData(
+                                          email: valueOrDefault<String>(
+                                            _model
+                                                .emailFieldTextController.text,
+                                            'example@gmail.com',
+                                          ),
+                                          createdTime: getCurrentTimestamp,
+                                        ));
 
-                                  await UsersRecord.collection
-                                      .doc(user.uid)
-                                      .update(createUsersRecordData(
-                                        email: valueOrDefault<String>(
-                                          _model.emailFieldTextController.text,
-                                          'example@gmail.com',
+                                    logFirebaseEvent(
+                                        'SignUp_Button_navigate_to');
+
+                                    context.goNamedAuth(
+                                        OnboardingWidget.routeName,
+                                        context.mounted);
+
+                                    logFirebaseEvent(
+                                        'SignUp_Button_google_analytics_event');
+                                    logFirebaseEvent('new_users');
+                                  },
+                                  text: 'Sign Up',
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          font: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
                                         ),
-                                        createdTime: getCurrentTimestamp,
-                                      ));
-
-                                  logFirebaseEvent('SignUp_Button_navigate_to');
-
-                                  context.goNamedAuth(
-                                      OnboardingWidget.routeName,
-                                      context.mounted);
-
-                                  logFirebaseEvent(
-                                      'SignUp_Button_google_analytics_event');
-                                  logFirebaseEvent('new_users');
-                                },
-                                text: 'Sign Up',
-                                options: FFButtonOptions(
-                                  height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Montserrat',
-                                        color: Colors.black,
-                                        fontSize: 20.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(8.0),
+                                    elevation: 0.0,
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
                                 ),
                               ),
                             ),
@@ -597,8 +753,21 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                         ),
                       ),
@@ -609,8 +778,20 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('google_signUp pressed ...');
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'SIGN_UP_PAGE_PAGE_google_signUp_ON_TAP');
+                            logFirebaseEvent('google_signUp_auth');
+                            GoRouter.of(context).prepareAuthEvent();
+                            final user =
+                                await authManager.signInWithGoogle(context);
+                            if (user == null) {
+                              return;
+                            }
+                            logFirebaseEvent('google_signUp_navigate_to');
+
+                            context.pushNamedAuth(
+                                OnboardingWidget.routeName, context.mounted);
                           },
                           text: 'Continue With Google',
                           icon: FaIcon(
@@ -630,12 +811,20 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  fontFamily: 'Montserrat',
+                                  font: GoogleFonts.montserrat(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
+                                  ),
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 18.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
                                 ),
                             elevation: 0.0,
                             borderSide: BorderSide(
@@ -662,9 +851,22 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                             InkWell(
@@ -684,12 +886,20 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
                                       fontSize: 16.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                             ),

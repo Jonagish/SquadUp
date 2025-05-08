@@ -65,6 +65,16 @@ class CreatedGamesRecord extends FirestoreRecord {
   String get hostUsername => _hostUsername ?? '';
   bool hasHostUsername() => _hostUsername != null;
 
+  // "user_ref" field.
+  DocumentReference? _userRef;
+  DocumentReference? get userRef => _userRef;
+  bool hasUserRef() => _userRef != null;
+
+  // "list_players" field.
+  List<DocumentReference>? _listPlayers;
+  List<DocumentReference> get listPlayers => _listPlayers ?? const [];
+  bool hasListPlayers() => _listPlayers != null;
+
   void _initializeFields() {
     _location = snapshotData['location'] as LatLng?;
     _address = snapshotData['address'] as String?;
@@ -76,6 +86,8 @@ class CreatedGamesRecord extends FirestoreRecord {
     _dateGame = snapshotData['date_game'] as DateTime?;
     _setting = snapshotData['setting'] as String?;
     _hostUsername = snapshotData['host_username'] as String?;
+    _userRef = snapshotData['user_ref'] as DocumentReference?;
+    _listPlayers = getDataList(snapshotData['list_players']);
   }
 
   static CollectionReference get collection =>
@@ -123,6 +135,7 @@ Map<String, dynamic> createCreatedGamesRecordData({
   DateTime? dateGame,
   String? setting,
   String? hostUsername,
+  DocumentReference? userRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -136,6 +149,7 @@ Map<String, dynamic> createCreatedGamesRecordData({
       'date_game': dateGame,
       'setting': setting,
       'host_username': hostUsername,
+      'user_ref': userRef,
     }.withoutNulls,
   );
 
@@ -148,6 +162,7 @@ class CreatedGamesRecordDocumentEquality
 
   @override
   bool equals(CreatedGamesRecord? e1, CreatedGamesRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.location == e2?.location &&
         e1?.address == e2?.address &&
         e1?.createdTime == e2?.createdTime &&
@@ -157,7 +172,9 @@ class CreatedGamesRecordDocumentEquality
         e1?.peoplePlaying == e2?.peoplePlaying &&
         e1?.dateGame == e2?.dateGame &&
         e1?.setting == e2?.setting &&
-        e1?.hostUsername == e2?.hostUsername;
+        e1?.hostUsername == e2?.hostUsername &&
+        e1?.userRef == e2?.userRef &&
+        listEquality.equals(e1?.listPlayers, e2?.listPlayers);
   }
 
   @override
@@ -171,7 +188,9 @@ class CreatedGamesRecordDocumentEquality
         e?.peoplePlaying,
         e?.dateGame,
         e?.setting,
-        e?.hostUsername
+        e?.hostUsername,
+        e?.userRef,
+        e?.listPlayers
       ]);
 
   @override

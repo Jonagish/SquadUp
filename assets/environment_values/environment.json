@@ -1,0 +1,4 @@
+{
+  "apiURLNearbyPlaces": "https://maps.googleapis.com/maps/api/place/nearbysearch/json",
+"apiURLGeoCodeMaps": "https://maps.googleapis.com/maps/api/geocode/json"
+}
